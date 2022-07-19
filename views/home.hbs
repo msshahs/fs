@@ -1,0 +1,1573 @@
+<html>
+
+<head>
+    <title>slider</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        window.onload = function() {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                backgroundColor: "#C0C0C0",
+                title: {
+                    text: "Top Oil Reserves"
+                },
+                axisY: {
+                    title: "Reserves(MMbbl)"
+                },
+                data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendMarkerColor: "grey",
+                    legendText: "MMbbl = one million barrels",
+                    dataPoints: [{
+                        y: 300878,
+                        label: "Venezuela",
+                    }, {
+                        y: 266455,
+                        label: "Saudi",
+                    }, {
+                        y: 169709,
+                        label: "Canada",
+                    }, {
+                        y: 158400,
+                        label: "Iran",
+                    }, {
+                        y: 142503,
+                        label: "Iraq",
+                    }, {
+                        y: 101500,
+                        label: "Kuwait",
+                    }, {
+                        y: 97800,
+                        label: "UAE",
+                    }, {
+                        y: 80000,
+                        label: "Russia",
+                    }]
+                }]
+            });
+            chart.render();
+        }
+    </script>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+        body{
+            background-color: 	#C0C0C0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        .ch1,.contenthu,.more{
+            color: white;
+            opacity: 1;
+            font-weight: 500;
+        }
+        .containers {
+            height: 100vh;
+        }
+      
+        .btns {
+            cursor: pointer;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            top: 39vh;
+            z-index: 100000;
+        }
+        
+        .left {
+            position: absolute;
+            left: 10px;
+            z-index: 2;
+        }
+        
+        .right {
+            position: absolute;
+            right: 10px;
+            z-index: 2;
+        }
+        
+        .btn {
+            height: 32px;
+            width: 68px;
+        }
+        
+        .img {
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .btnss {
+            z-index: 100;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 6vh;
+            top: 90vh;
+        }
+        
+        .btn1 {
+            margin-left: 10px;
+            margin-right: 10px;
+            border: 2px solid grey;
+            height: 19px;
+            width: 20px;
+            border-radius: 150px;
+            z-index: 100000;
+            transition: 0.05s ease;
+        }
+        
+        #btn1 {
+            background:#800000 ;
+            height: 25px;
+            width: 24px;
+        }
+        
+        .I1 {
+            opacity: 1;
+        }
+        
+        .I5 {
+            opacity: 0;
+        }
+        
+        .I4 {
+            opacity: 0;
+        }
+        
+        .I3 {
+            opacity: 0;
+        }
+        
+        .I2 {
+            opacity: 0;
+        }
+        
+        #id2 {
+            transform: translate(0%, 100%);
+            width: 97px;
+            height: 7vh;
+            z-index: 100000;
+            opacity: 0.7;
+        }
+        
+        #id1 {
+            transform: translate(0%, 100%);
+            width: 97px;
+            height: 7vh;
+            z-index: 100000;
+            opacity: 0.7;
+        }
+        
+        
+        @media(max-width:1000px) {
+            #id1,
+            #id2 {
+                width: 65px;
+            }
+        }
+        
+        header {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 17px 170px;
+            transition: 0.4s ease;
+            z-index: 1000000;
+        }
+        
+        .ourname {
+            color: black;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        
+        span {
+            font-size: 2em;
+            color: 	#800000;
+        }
+        
+        #spn2 {
+            margin-left: 15px;
+        }
+        
+        .navbar {
+            position: relative;
+        }
+        
+        .navbaritems a {
+            color: rgb(207, 23, 54);
+            text-decoration: none;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin: 0px 15px;
+            transition: 0.4s ease;
+            position: relative;
+            top: 18;
+        }
+        
+        .navbaritems a::before {
+            content: "";
+            background: #800000;
+            width: 0%;
+            height: 3px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: 0.4s ease;
+        }
+        
+        .navbaritems a:hover::before {
+            width: 100%;
+        }
+        
+        
+        @media (max-width: 1000px) and (min-width:701px) {
+            header {
+                padding: 15px 61px;
+                width: 97%;
+            }
+            .navbaritems a {
+                font-size: 1.1em;
+                margin: 0px 6px;
+            }
+            .ourname {
+                font-size: 1.2em;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            header {
+                padding: 15px 15px;
+            }
+            .navbar {
+                display: none;
+            }
+            .navbar.active {
+                position: fixed;
+                border: 3px solid black;
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(1, 1, 1, 0.5);
+                backdrop-filter: blur(2px);
+            }
+            .navbar.active .navbaritems {
+                backdrop-filter: blur(4px);
+                background: transparent;
+                width: 400px;
+                height: 400px;
+                margin: 20px;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                box-shadow: 0 5px 50px rgb(1 1 1 /20%);
+                font-size: 14px;
+             
+            }
+            .navbaritems a {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 1.2em;
+                margin: 20px;
+                font-weight: bold;
+                color: white !important;
+            }
+            .menunav {
+                background: url("menu-outline.svg") no-repeat;
+                background-position: center;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                transition: 0.4s ease;
+                z-index: 1000000;
+            }
+            .menunav.active {
+                z-index: 1000000;
+                transition: 0.4s ease;
+                background: url("close-outline.svg") no-repeat;
+                background-position: center;
+            }
+            .rainbow {
+                opacity: 0;
+            }
+            .ourname {
+                font-size: 1.1em;
+            }
+        }
+        
+        .rainbow {
+            background: rgb(52, 43, 40);
+            background: linear-gradient( 90deg, rgba(52, 43, 40, 1) 2%, rgba(212, 64, 32, 1) 20%, rgba(71, 175, 93, 1) 38%, rgba(32, 139, 212, 1) 54%, rgba(190, 212, 32, 1) 72%, rgba(192, 32, 212, 1) 89%);
+            position: absolute;
+            width: 80%;
+            top: 10%;
+            height: 3px;
+            left: 10%;
+            height: 3px;
+            z-index: 1000000;
+            transition: 0.5s ease;
+        }
+        
+        @media(max-width:1150px) and (min-width:1000px) {
+            .ourname {
+                font-size: 1.5em;
+            }
+            .navbaritems a {
+                font-size: 1.4em;
+                margin: 0px 7px;
+            }
+        }
+        
+        @media(max-width:300px) {
+            .ourname {
+                font-size: 0.9em;
+            }
+        }
+        
+        .ourname {
+            cursor: pointer;
+        }
+        
+        @media(min-height:1000px)and (min-width:600px) {
+            .ourname {
+                font-size: 1.4em;
+            }
+            .rainbow {
+                top: 8%;
+            }
+        }
+        
+        .chartContainer {
+            z-index: 100000000000;
+            cursor: pointer;
+        }
+        
+        .maincont {
+            top: 0;
+            color: rgba(255, 255, 255, 0.623);
+            width: 90%;
+            height: 70vh;
+            cursor: pointer;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+            left: 5%;
+        }
+        
+        #m1 {
+            opacity: 1;
+        }
+        
+        #m2 {
+            opacity: 0;
+        }
+        
+        #m3 {
+            opacity: 0;
+        }
+        
+        #m4 {
+            opacity: 0;
+        }
+        
+        #m5 {
+            opacity: 0;
+        }
+        
+        .contenthu {
+            position: absolute;
+            top: 48%;
+            left: 8%;
+        }
+        
+        .ch1 {
+            position: absolute;
+            top: 37%;
+            left: 8%;
+        }
+        
+        .more {
+            position: absolute;
+            top: 58%;
+            left: 8%;
+        }
+        
+        @media (max-width: 1000px) {
+            .content {
+                padding: 10px 20px;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .content {
+                padding: 12px 20px;
+                /* padding: 100px 20px; */
+            }
+        }
+        
+        @media(min-width:1750px) {
+            .ch1 {
+                font-size: 50px;
+            }
+            .contenthu {
+                font-size: 25px;
+            }
+            .more {
+                font-size: 28px;
+            }
+        }
+        
+        @media(min-width:1240px) and (max-width:1749px) {
+            .ch1 {
+                font-size: 45px;
+                top: 40%;
+                left: 7%;
+            }
+            .contenthu {
+                font-size: 20px;
+                top: 60%;
+                left: 7%;
+
+            }
+            .more {
+                font-size: 25px;
+                top: 75%;
+                left: 7%;
+            }
+        }
+        
+        @media(min-width:1000px) and (max-width:1239px) {
+            .ch1 {
+                font-size: 38px;
+                top: 4%;
+                left: 7%;
+            }
+            .contenthu {
+                font-size: 18px;
+                top: 60%;
+                left: 7%;
+            }
+            .more {
+                font-size: 21px;
+                top: 70%;
+                left: 7%;
+            }
+        }
+        
+        @media(min-width:600px) and (max-width:999px) {
+            .ch1 {
+                font-size: 38px;
+                top: 40%;
+                left: 10%;
+            }
+            .contenthu {
+                font-size: 18px;
+                top: 60%;
+                left: 10%;
+                
+            }
+            .more {
+                font-size: 21px;
+                top: 80%;
+                left: 10%;
+            }
+        }
+        
+        @media(min-width:250px) and (max-width:599px) {
+            .ch1 {
+                font-size: 30px;
+                top: 40%;
+                left: 13%;
+
+            }
+            .contenthu {
+                font-size: 15px;
+                top: 60%;
+                left: 13%;
+            }
+            .more {
+                font-size: 18px;
+                top: 80%;
+                left: 13%;
+            }
+        }
+        
+        .main {
+            margin-top: 2px;
+        }
+        
+        .video {
+            object-fit: cover;
+            height: 25vh !important;
+            max-width: 100% !important;
+        }
+        
+        .imghu {
+            position: absolute;
+            width: 60px;
+            left: 49%;
+            top: 45%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+        
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 350px) {
+            .txt1 {
+                width: 100%;
+            }
+        }
+        
+        .container {
+            width: 80%;
+            height: 75vh;
+            position: absolute;
+            top: 20%;
+            left: 7%;
+            z-index: -1;
+        }
+        
+        .videoc {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            opacity: 0;
+            top: 138%;
+            left: 5%;
+            /* z-index: 10000000000; */
+        }
+        
+        .imgx {
+            width: 40px;
+            position: absolute;
+            z-index: 1000;
+            cursor: pointer;
+            opacity: 0;
+            height: 40px;
+            top: 126%;
+            left: 12%;
+        }
+        
+        @media(min-width:1941px) {
+            .imgx {
+                width: 38px;
+                height: 38px;
+            }
+        }
+        
+        @media(min-width:701px)and (max-width:1500px) {
+            .imgx {
+                width: 38px;
+                height: 38px;
+            }
+        }
+        
+        @media(max-width:399px) {
+            .imgx {
+                width: 28px;
+                height: 28px;
+                top: 171%;
+            }
+            .videoc {
+                top: 198%;
+            }
+        }
+        
+        @media(max-width:700px) and (min-width:400px) {
+            .videoc {
+                top: 198%;
+            }
+            .imgx {
+                top: 171%;
+                width: 28px;
+                height: 28px;
+            }
+        }
+        
+        .div {
+            height: 60vh;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.918);
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.856);
+            width: 100%;
+            /* cursor: pointer; */
+            /* min-height: %; */
+            color: whitesmoke;
+        }
+        
+        .cont1 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont2 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont3 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont4 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont5 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .rowa {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        
+        li {
+            list-style: none;
+            margin-top: 4px;
+        }
+        
+        .fa {
+            text-decoration: none;
+            color: white!important;
+        }
+        
+        li .fa {
+            text-decoration: none;
+            color: white!important;
+        }
+        
+        u .fa {
+            text-decoration: none;
+            color: white!important;
+        }
+        .fa:hover{
+            color: rgba(223, 124, 143, 0.89) !important;
+        }
+        .maincont11{
+            /* border: 3px solid black; */
+            width: 100%;
+            margin: 0px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+            flex-wrap: wrap;
+        }
+        .pair111{
+            /* border: 3px solid blue; */
+            width: 650px;
+            /* height: 350px; */
+            margin: 1px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+
+        }
+        .image11,.content11{
+            width: 320px;
+            height: 320px;
+            /* border: 2px solid black; */
+            transition: 0.5s all;
+            position: relative;
+        }
+
+        .content11{
+            padding: 0px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: justify;
+            background-color:rgb(206, 203, 203);
+            color: black;
+        }
+        #image111{
+            /* background: url('https://i.pinimg.com/originals/f0/af/f3/f0aff3165e2b0c2f42ca45e672db5988.jpg'); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            
+            
+        }
+        #image211{
+            /* background: url('https://static.propsearch.ae/photos/dubai/areas/dubai-square-13493.jpg'); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .image11{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            transition: 0.5s all;
+        }
+        .image11:hover #original11{
+            width: 50%;
+            height: 50%;
+            /* border-radius: 50%; */
+            border: 2px solid white;
+            box-shadow: 0 0 10px black;
+        }   
+
+        .image11:hover{
+            border: 1px solid black;
+            box-shadow: 0px 0px 10px black;
+        }
+        #l211{
+           position: absolute;
+           top: -5000px;
+           left: -5000px;
+
+
+        }
+        @media (max-width:640px) {
+            #l211{
+               position:static;
+               top: 0;
+               left: 0;
+            }
+            #l111{
+              display: none;
+            }
+
+        }
+
+    
+    </style>
+</head>
+
+<body>
+    <header>
+        <p class="ourname"><span>S</span>kyline<span id="spn2">T</span>ravels</p>
+        <div class="menunav"></div>
+        <div class="navbar">
+            <div class="navbaritems" >
+                <a href="" style="color:black; font-weight: 600;  ">Home</a>
+                <a href="" style="color:black; font-weight: 600; ">Video Gal</a>
+                <a href="" style="color:black; font-weight: 600; ">Contact Us</a>
+                <a href="" style="color:black; font-weight: 600; ">AboutUs</a>
+            </div>
+        </div>
+    </header>
+    <div class="rainbow"></div>
+    <div class="containers" id="container">
+        <div class="btns">
+            <div class="left">
+                <img src="chevron-back-outline.svg" class="img-responsive btn" id="id1">
+            </div>
+            <div class="right">
+                <img src="chevron-forward-outline.svg" class="img-responsive btn" id="id2">
+            </div>
+        </div>
+        <div class="images">
+            <div id="1" class="I1"><video src="vid1.mp4" muted loop autoplay class="img"></video></div>
+            <div id="2" class="I2">
+                <video src="vid2.mp4" muted loop autoplay class="img"></video>
+            </div>
+            <div id="3" class="I3">
+                <video src="video.mp4" muted loop autoplay class="img">
+                    </div>
+                <div id="4" class="I4">
+                    <video src="vid1.mp4" muted loop autoplay class="img">
+                </div>
+                <div id="5" class="I5">
+                    <video src="video.mp4" muted loop autoplay class="img">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="maincont active" id="m1">
+                <h1 class="ch1">Our Content1</h1>
+                <p class="contenthu">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed obcaecati optio at temporibus maiores ad?
+                </p>
+                <a href="#" class="more">More ...</a>
+            </div>
+            <div class="maincont" id="m2">
+                <h1 class="ch1">Our Content2</h1>
+                <p class="contenthu">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed obcaecati optio at temporibus maiores ad?
+                </p>
+                <a href="#" class="more">More ...</a>
+            </div>
+            <div class="maincont" id="m3">
+                <h1 class="ch1">Our Content3</h1>
+                <p class="contenthu">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed obcaecati optio at temporibus maiores ad?
+                </p>
+                <a href="#" class="more">More ...</a>
+            </div>
+            <div class="maincont" id="m4">
+                <h1 class="ch1">Our Content4</h1>
+                <p class="contenthu">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed obcaecati optio at temporibus maiores ad?
+                </p>
+                <a href="#" class="more">More ...</a>
+            </div>
+            <div class="maincont" id="m5">
+                <h1 class="ch1">Our Content5</h1>
+                <p class="contenthu">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed obcaecati optio at temporibus maiores ad?
+                </p>
+                <a href="#" class="more">More ...</a>
+            </div>
+        </div>
+        <div class="btnss">
+            <div class="btn1" id="btn1"></div>
+            <div class="btn1" id="btn2"></div>
+            <div class="btn1" id="btn3"></div>
+            <div class="btn1" id="btn4"></div>
+            <div class="btn1" id="btn5"></div>
+        </div>
+        <br>
+        <h2 style="text-align: center; padding: 0px 10px; font-weight: bold;">
+            Our Reach
+        </h2>
+        <div class="horr" style="width: 6%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%;">
+
+        </div>
+        <div id="chartContainer" style="height: 370px; width: 85%; background-color:rgba(16,0,225,0.12) ;margin-left:6% ; margin-top: 40px;"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          <br>
+        <br>
+        <br>
+        
+                <h2 style="text-align: center; padding: 0px 10px; font-weight: bold; ">Some related videos</h2>
+                <div class="horr" style="width: 6%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%;"></div>
+      
+        <div class="container-fluid t1" style="margin-bottom: 100px; margin-top: 50px;">
+            <div class="row" id="main">
+                <div class="col-sm-3 main" id="main1">
+                    <a href="#" class="thumbnail">
+                        <video src="vid1.mp4" class="video" id="v1" muted loop></video>
+                </a>
+                <img src="play.png" class="imghu" id="img1" alt="Responsive-image" />
+            </div>
+            <div class="col-sm-3 main" id="main2">
+                <a href="#" class="thumbnail">
+                    <video src="vid1.mp4" class="video" id="v2" muted loop></video>
+                </a>
+                <img src="play.png" class="imghu" id="img2" alt="Responsive-image" />
+            </div>
+            <div class="col-sm-3 main" id="main3">
+                <a href="#" class="thumbnail">
+                    <video src="vid1.mp4" class="video" id="v3" muted loop></video>
+                </a>
+                <img src="play.png" class="imghu" id="img3" alt="Responsive-image" />
+            </div>
+            <div class="col-sm-3 main" id="main4">
+                <a href="#" class="thumbnail">
+                    <video src="vid1.mp4" class="video" id="v4" muted loop></video>
+                </a>
+                <img src="play.png" class="imghu" id="img4" alt="Responsive-image" />
+            </div>
+        </div>
+    </div>
+    <div class="container" id="fakeHU">
+        <video src="Waves - 70796.mp4" class="videoc" id="vc1" controls></video>
+        <video src="Waves - 70796.mp4" class="videoc" id="vc2" controls></video>
+        <video src="Waves - 70796.mp4" class="videoc" id="vc3" controls></video>
+        <video src="Waves - 70796.mp4" class="videoc" id="vc4" controls></video>
+    </div>
+    <img src="close.png" class="img img-responsive imgx" id="imgclose">
+
+
+
+    <h2 style="text-align: center; padding: 0px 10px; font-weight: bold; ">
+      Showpiece
+    </h2>
+    <div class="horr" style="width: 6%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%; margin-bottom: 20px;"></div>
+    <div class="h">
+
+   
+        <div class="maincont11">
+            <div class="pair111">
+                <div class="image11" id="image11">
+                    
+                    <img src="https://i.pinimg.com/originals/f0/af/f3/f0aff3165e2b0c2f42ca45e672db5988.jpg" id="original11" alt="">
+                    <img src="https://i.pinimg.com/originals/f0/af/f3/f0aff3165e2b0c2f42ca45e672db5988.jpg"  alt="" style="position: absolute; top: 0;left: 0;width: 100%; z-index: -1; opacity: 1;filter: blur(5px); filter: grayscale(100%);">
+    
+                </div>
+                <div class="content11">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis distinctio pariatur non iusto animi neque illum sequi, voluptatum sapiente voluptatem culpa, facere, accusamus nihil optio! Sapiente ut, eos atque cumque dolorum nam repellat necessitatibus autem, officia molestias aliquam quo eum, ex tenetur vel dolore? Cumque dolore consequatur dolorem accusantium eveniet!
+                </div>
+            </div>
+            <div class="pair111">
+                <div class="image11" id="image211">
+                    <img src="https://static.propsearch.ae/photos/dubai/areas/dubai-square-13493.jpg" id="original11" alt="" >
+                    <img src="https://static.propsearch.ae/photos/dubai/areas/dubai-square-13493.jpg" alt="" style="position: absolute; top: 0;left: 0;width: 100%; z-index: -1; opacity: 1;filter: blur(3px); filter: grayscale(100%); ">
+                </div>
+                <div class="content11">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi asperiores veniam sed esse ipsum! Impedit, itaque? Quisquam natus doloribus odio eaque odit nam, nihil error iste suscipit a ab animi vitae minima similique iusto, provident fugiat eveniet nisi laborum velit dolorem nobis porro. Rem dolores incidunt eum officiis at adipisci.
+                </div>
+            </div>
+        </div>
+    
+    
+    
+        <!-- for mediaqury -->
+    
+    
+        <div class="maincont11" id="l211">
+            <div class="pair111">
+                <div class="image11" id="image111">
+                    
+                    <img src="https://i.pinimg.com/originals/f0/af/f3/f0aff3165e2b0c2f42ca45e672db5988.jpg" id="original11" alt="">
+                    <img src="https://i.pinimg.com/originals/f0/af/f3/f0aff3165e2b0c2f42ca45e672db5988.jpg"  alt="" style="position: absolute; top: 0;left: 0;width: 100%; z-index: -1; opacity: 1;filter: blur(5px); filter: grayscale(100%);">
+    
+                </div>
+                <div class="content11">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis distinctio pariatur non iusto animi neque illum sequi, voluptatum sapiente voluptatem culpa, facere, accusamus nihil optio! Sapiente ut, eos atque cumque dolorum nam repellat necessitatibus autem, officia molestias aliquam quo eum, ex tenetur vel dolore? Cumque dolore consequatur dolorem accusantium eveniet!
+                </div>
+            </div>
+            <div class="pair111">
+                <div class="image11" id="image211">
+                    <img src="https://static.propsearch.ae/photos/dubai/areas/dubai-square-13493.jpg" id="original11" alt="" >
+                    <img src="https://static.propsearch.ae/photos/dubai/areas/dubai-square-13493.jpg" alt="" style="position: absolute; top: 0;left: 0;width: 100%; z-index: -1; opacity: 1;filter: blur(3px); filter: grayscale(100%); ">
+                </div>
+                <div class="content11">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi asperiores veniam sed esse ipsum! Impedit, itaque? Quisquam natus doloribus odio eaque odit nam, nihil error iste suscipit a ab animi vitae minima similique iusto, provident fugiat eveniet nisi laborum velit dolorem nobis porro. Rem dolores incidunt eum officiis at adipisci.
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    
+        <!-- original -->
+        <div class="maincont11" id="l111">
+            <div class="pair111">
+              
+                <div class="content11">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis distinctio pariatur non iusto animi neque illum sequi, voluptatum sapiente voluptatem culpa, facere, accusamus nihil optio! Sapiente ut, eos atque cumque dolorum nam repellat necessitatibus autem, officia molestias aliquam quo eum, ex tenetur vel dolore? Cumque dolore consequatur dolorem accusantium eveniet!
+                </div>
+                <div class="image11" id="image111">
+                    <img src="https://i.pinimg.com/originals/f0/af/f3/f0aff3165e2b0c2f42ca45e672db5988.jpg" alt="">
+                </div>
+            </div>
+            <div class="pair111">
+               
+                <div class="content11">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi asperiores veniam sed esse ipsum! Impedit, itaque? Quisquam natus doloribus odio eaque odit nam, nihil error iste suscipit a ab animi vitae minima similique iusto, provident fugiat eveniet nisi laborum velit dolorem nobis porro. Rem dolores incidunt eum officiis at adipisci.
+                </div>
+                <div class="image11" id="image211">
+                    <img src="https://static.propsearch.ae/photos/dubai/areas/dubai-square-13493.jpg" alt="" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="margin-top: 100px;">
+        <div class="containerd">
+            <div class="rowa">
+                <div class="cont1">
+                    <div class="1hu">
+                        <h1>SkyBright Travels</h1>
+                        <br>
+                        <p>We create the best possible vaccation trips for you.</p>
+                        <span><b>Be Bold.</b></span>
+                    </div>
+                </div>
+                <div class="cont2">
+                    <div class="2hu">
+                        <h3>Explore</h2>
+                            <li><a href="#" class="fa">Home</a></li>
+                            <li><a href="#" class="fa">About</a></li>
+                            <li><a href="#" class="fa">VideoGallery</a></li>
+                            <li><a href="#" class="fa">ContactUs</a></li>
+                    </div>
+                </div>
+                <div class="cont3">
+                    <div class="3hu">
+                        <h3>Visit Our Other Sites</h2>
+                            <li>
+                                <a href="https://harshul2611.000webhostapp.com/" class="fa">LifeStyle Store</a>
+                            </li>
+                            <li><a href="https://contentdummywebsite.000webhostapp.com/" class="fa">E-Commerce Store</a></li>
+                            <br>
+                            <h3>ContactUs</h3>
+                            <a href="#" class="fa">skybright@gmail.com</a>
+                            <br>
+                            <p>98789544648454</p>
+                    </div>
+                </div>
+                <div class="cont4">
+                    <div class="4hu">
+                        <h3>Legal</h2>
+                            <li>
+                                Terms
+                            </li>
+                            <li>Privacy</li>
+                            <br>
+                            <h3>Follow</h3>
+                            <li><a href="#" class="fa">Instagram</a></li>
+                            <li><a href="#" class="fa">Twitter</a></li>
+                            <li><a href="#" class="fa">LinkedIn</a></li>
+                    </div>
+                </div>
+                <div class="cont5">
+                    <div class="5hu">
+                        <h3>
+                            <u>Next</u>
+                            <u> : </u>
+                            <u> <a href="#" class="fa">AboutUs</a></u>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="rowa">
+                <div class="cpy">
+                    <p> Copyright © 2021 SkyBright Travels. All Rights Reserved </p>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    
+    </footer>
+    <script>
+        let btn = document.querySelector(".menunav");
+        let nav = document.querySelector(".navbar");
+        btn.addEventListener("click", () => {
+            btn.classList.toggle("active");
+            nav.classList.toggle("active");
+        });
+        const change = document.getElementById('id1');
+        const change2 = document.getElementById('id2');
+        const pic1 = document.getElementById('1');
+        const pic2 = document.getElementById('2');
+        const pic3 = document.getElementById('3');
+        const pic4 = document.getElementById('4');
+        const pic5 = document.getElementById('5');
+        const btn1 = document.getElementById('btn1');
+        const btn2 = document.getElementById('btn2');
+        const btn3 = document.getElementById('btn3');
+        const btn4 = document.getElementById('btn4');
+        const btn5 = document.getElementById('btn5');
+        const m1 = document.getElementById('m1');
+        const m2 = document.getElementById('m2');
+        const m3 = document.getElementById('m3');
+        const m4 = document.getElementById('m4');
+        const m5 = document.getElementById('m5');
+        let count = 0;
+        let count2 = 0;
+        btn1.addEventListener("mouseover", () => {
+            btn1.style.width = "24px";
+            btn1.style.height = "25px";
+        })
+        btn2.addEventListener("mouseover", () => {
+            btn2.style.width = "24px";
+            btn2.style.height = "25px";
+        })
+        btn3.addEventListener("mouseover", () => {
+            btn3.style.width = "24px";
+            btn3.style.height = "25px";
+        })
+        btn4.addEventListener("mouseover", () => {
+            btn4.style.width = "24px";
+            btn4.style.height = "25px";
+        })
+        btn5.addEventListener("mouseover", () => {
+            btn5.style.width = "24px";
+            btn5.style.height = "25px";
+        })
+        btn1.addEventListener("mouseout", () => {
+            btn1.style.width = "19px";
+            btn1.style.height = "20px";
+        })
+        btn2.addEventListener("mouseout", () => {
+            btn2.style.width = "19px";
+            btn2.style.height = "20px";
+        })
+        btn3.addEventListener("mouseout", () => {
+            btn3.style.width = "19px";
+            btn3.style.height = "20px";
+        })
+        btn4.addEventListener("mouseout", () => {
+            btn4.style.width = "19px";
+            btn4.style.height = "20px";
+        })
+        btn5.addEventListener("mouseout", () => {
+            btn5.style.width = "19px";
+            btn5.style.height = "20px";
+        })
+        change.addEventListener('click', () => {
+            count2--;
+            if (count2 == 0) {
+                btn1.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                pic1.style.opacity = 1;
+                btn1.style.width = "24px";
+                btn1.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                pic2.style.opacity = 0;
+                pic3.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic5.style.opacity = 0;
+                m1.style.opacity = 1;
+                m2.style.opacity = 0;
+                m3.style.opacity = 0;
+                m4.style.opacity = 0;
+                m5.style.opacity = 0;
+
+            }
+            if (count2 == -1 || count2 == 4) {
+                btn5.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic5.style.opacity = 1;
+                pic2.style.opacity = 0;
+                pic3.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn5.style.width = "24px";
+                btn5.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                m5.style.opacity = 1;
+                m2.style.opacity = 0;
+                m3.style.opacity = 0;
+                m4.style.opacity = 0;
+                m1.style.opacity = 0;
+            }
+            if (count2 == -2 || count2 == 3) {
+                btn4.style.background = "rgb(207, 23, 54)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic4.style.opacity = 1;
+                pic2.style.opacity = 0;
+                pic3.style.opacity = 0;
+                pic5.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn4.style.width = "24px";
+                btn4.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m4.style.opacity = 1;
+                m2.style.opacity = 0;
+                m3.style.opacity = 0;
+                m1.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+            if (count2 == -3 || count2 == 2) {
+                btn3.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic3.style.opacity = 1;
+                pic2.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic5.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn3.style.width = "24px";
+                btn3.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m3.style.opacity = 1;
+                m2.style.opacity = 0;
+                m1.style.opacity = 0;
+                m4.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+            if (count2 == -4 || count2 == 1) {
+                btn2.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic2.style.opacity = 1;
+                pic3.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic5.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn2.style.width = "24px";
+                btn2.style.height = "25px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m2.style.opacity = 1;
+                m1.style.opacity = 0;
+                m3.style.opacity = 0;
+                m4.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+            if (count2 == -4) {
+                count2 = 1;
+            }
+        })
+        change2.addEventListener('click', () => {
+            count2++;
+            count++;
+            if (count2 == 1 || count2 == -4) {
+                btn2.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic2.style.opacity = 1;
+                pic5.style.opacity = 0;
+                pic3.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn2.style.width = "24px";
+                btn2.style.height = "25px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m2.style.opacity = 1;
+                m1.style.opacity = 0;
+                m3.style.opacity = 0;
+                m4.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+            if (count2 == 2 || count2 == -3) {
+                btn3.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic3.style.opacity = 1;
+                pic2.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic5.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn3.style.width = "24px";
+                btn3.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m3.style.opacity = 1;
+                m2.style.opacity = 0;
+                m1.style.opacity = 0;
+                m4.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+            if (count2 == 3 || count2 == -2) {
+                btn4.style.background = "rgb(207, 23, 54)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic4.style.opacity = 1;
+                pic2.style.opacity = 0;
+                pic3.style.opacity = 0;
+                pic5.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn4.style.width = "24px";
+                btn4.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m4.style.opacity = 1;
+                m2.style.opacity = 0;
+                m3.style.opacity = 0;
+                m1.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+            if (count2 == 4 || count2 == -1) {
+                btn5.style.background = "rgb(207, 23, 54)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn1.style.background = "rgba(0,0,0,0.2)";
+                pic5.style.opacity = 1;
+                pic3.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic2.style.opacity = 0;
+                pic1.style.opacity = 0;
+                btn5.style.width = "24px";
+                btn5.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn1.style.width = "19px";
+                btn1.style.height = "20px";
+                m5.style.opacity = 1;
+                m2.style.opacity = 0;
+                m3.style.opacity = 0;
+                m4.style.opacity = 0;
+                m1.style.opacity = 0;
+            }
+            if (count2 == 4) {
+                count2 = -1;
+            }
+            if (count2 == 0) {
+                btn1.style.background = "rgb(207, 23, 54)";
+                btn4.style.background = "rgba(0,0,0,0.2)";
+                btn3.style.background = "rgba(0,0,0,0.2)";
+                btn5.style.background = "rgba(0,0,0,0.2)";
+                btn2.style.background = "rgba(0,0,0,0.2)";
+                pic1.style.opacity = 1;
+                pic2.style.opacity = 0;
+                pic3.style.opacity = 0;
+                pic4.style.opacity = 0;
+                pic5.style.opacity = 0;
+                btn1.style.width = "24px";
+                btn1.style.height = "25px";
+                btn2.style.width = "19px";
+                btn2.style.height = "20px";
+                btn3.style.width = "19px";
+                btn3.style.height = "20px";
+                btn4.style.width = "19px";
+                btn4.style.height = "20px";
+                btn5.style.width = "19px";
+                btn5.style.height = "20px";
+                m1.style.opacity = 1;
+                m2.style.opacity = 0;
+                m3.style.opacity = 0;
+                m4.style.opacity = 0;
+                m5.style.opacity = 0;
+            }
+        });
+        let change1 = document.getElementById("v1");
+        let change21 = document.getElementById("img1");
+        let change3 = document.getElementById("v2");
+        let change4 = document.getElementById("img2");
+        let change5 = document.getElementById("v3");
+        let change6 = document.getElementById("img3");
+        let change7 = document.getElementById("v4");
+        let change8 = document.getElementById("img4");
+        let ch = document.getElementById("imgclose");
+        let ch2 = document.getElementById("vc1");
+        let ch3 = document.getElementById("vc2");
+        let ch4 = document.getElementById("vc3");
+        let ch5 = document.getElementById("vc4");
+        let ch10 = document.getElementById("fakeHU");
+
+        ch.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "0";
+            ch10.style.zIndex = "-1";
+        })
+        change21.addEventListener("click", () => {
+            ch2.style.opacity = "1";
+            ch2.style.zIndex = "1000";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change1.addEventListener("click", () => {
+            ch2.style.opacity = "1";
+            ch2.style.zIndex = "1000";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change4.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "1";
+            ch3.style.zIndex = "1000";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change3.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "1";
+            ch3.style.zIndex = "1000";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change6.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "1";
+            ch4.style.zIndex = "1000";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change5.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "1";
+            ch4.style.zIndex = "1000";
+            ch5.style.opacity = "0";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change8.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "1";
+            ch5.style.zIndex = "1000";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change7.addEventListener("click", () => {
+            ch2.style.opacity = "0";
+            ch3.style.opacity = "0";
+            ch4.style.opacity = "0";
+            ch5.style.opacity = "1";
+            ch5.style.zIndex = "1000";
+            ch.style.opacity = "1";
+            ch10.style.zIndex = "100";
+        })
+        change1.addEventListener("mouseover", () => {
+            change1.play();
+            change21.style.transition = "0.5s";
+            change21.style.opacity = "0.5";
+        });
+        change3.addEventListener("mouseover", () => {
+            change3.play();
+            change4.style.opacity = "0.5";
+            change4.style.transition = "0.5s";
+        });
+        change5.addEventListener("mouseover", () => {
+            change5.play();
+            change6.style.opacity = "0.5";
+            change6.style.transition = "0.5s";
+        });
+        change7.addEventListener("mouseover", () => {
+            change7.play();
+            change8.style.opacity = "0.5";
+            change8.style.transition = "0.5s";
+        });
+        change1.addEventListener("mouseout", () => {
+            change1.pause();
+            change21.style.opacity = "1";
+            change21.style.transition = "0.5s";
+        });
+        change3.addEventListener("mouseout", () => {
+            change3.pause();
+            change4.style.opacity = "1";
+            change4.style.transition = "0.5s";
+        });
+        change5.addEventListener("mouseout", () => {
+            change5.pause();
+            change6.style.opacity = "1";
+            change6.style.transition = "0.5s";
+        });
+        change7.addEventListener("mouseout", () => {
+            change7.pause();
+            change8.style.opacity = "1";
+            change8.style.transition = "0.5s";
+        });
+    </script>
+</body>
+
+</html>

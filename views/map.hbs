@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <title>Map View</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100%;
+        height: 100vh;
+      }
+
+
+      /* //london */
+      #marker,
+      .f {
+        background-image: url("https://c8.alamy.com/comp/R7TPMC/bug-ben-london-flag-round-england-travel-illustration-R7TPMC.jpg");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .mapboxgl-popup {
+        max-width: 200px;
+      }
+      .vid {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        z-index: 1000;
+        object-fit: cover;
+        display: none;
+      }
+
+      /* switz */
+
+      #marker1 {
+        background-image: url("https://st2.depositphotos.com/4278755/44503/v/950/depositphotos_445038458-stock-illustration-switzerland-icon-shape-of-the.jpg");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      
+      }
+      /* maldives */
+
+      #marker2 {
+        background-image: url("https://media.istockphoto.com/vectors/maldives-sign-vector-id1207948519");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      /* dubai */
+
+      #marker3 {
+        background-image: url("https://cdn.countryflags.com/thumbs/united-arab-emirates/flag-3d-round-250.png");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      /* france */
+
+      #marker4 {
+        background-image: url("https://p.kindpng.com/picc/s/341-3412411_about-the-french-language-france-round-flag-hd.png");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      
+      /* spain */
+
+      #marker5 {
+        background-image: url("https://image.shutterstock.com/image-vector/round-glossy-vector-icon-national-260nw-262977152.jpg");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      #marker6 {
+        background-image: url("https://www.pngitem.com/pimgs/m/23-231125_greece-flag-round-png-transparent-png.png");
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <video src="" class="vid" loop autoplay></video>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoibWVldHNoYWg2NjAzIiwiYSI6ImNrcGFxb3BwcDBsamUyd3F5aGVpNzAwdWwifQ.qvB4RRqVhMoiFEPufiptJw";
+
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/dark-v10",
+        center: [0, 40],
+        zoom: 1,
+      });
+
+      // Add zoom and rotation controls to the map.
+      map.addControl(new mapboxgl.NavigationControl());
+
+      // Create a marker and add it to the map.
+      // new mapboxgl.Marker().setLngLat([10, 20]).addTo(map);
+
+      // create the popup
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText("London Baby");
+
+      // create DOM element for the marker
+      var el = document.createElement("div");
+      el.id = "marker";
+      el.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el)
+        .setLngLat([-0.127758, 51.507351])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+      //------------------------------------switzerland------------------------------------
+
+      // create the popup
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        "Switzerland Baby"
+      );
+
+      // create DOM element for the marker
+      var el2 = document.createElement("div");
+      el2.id = "marker1";
+      el2.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el2)
+        .setLngLat([8.2275, 46.8182])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+
+      //------------------------------------maldives------------------------------------
+
+
+      // create the popup
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        "Switzerland Baby"
+      );
+
+      // create DOM element for the marker
+      var el2 = document.createElement("div");
+      el2.id = "marker2";
+      el2.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el2)
+        .setLngLat([73.399658, 1.924992])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+      //------------------------------------dubai------------------------------------
+
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        "Dubai Baby"
+      );
+
+      // create DOM element for the marker
+      var el3 = document.createElement("div");
+      el3.id = "marker3";
+      el3.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el3)
+        .setLngLat([55.2708,25.2048])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+      //-----------------------------------france------------------------------------
+
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        "France Baby"
+      );
+
+      // create DOM element for the marker
+      var el4 = document.createElement("div");
+      el4.id = "marker4";
+      el4.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el4)
+        .setLngLat([2.2137,	46.2276])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+
+      //-----------------------------------spain------------------------------------
+
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        "Spain Baby"
+      );
+
+      // create DOM element for the marker
+      var el5 = document.createElement("div");
+      el5.id = "marker5";
+      el5.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el5)
+        .setLngLat([-3.703790,40.416775])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+      //-----------------------------------greece------------------------------------
+
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        "Greece Baby"
+      );
+
+      // create DOM element for the marker
+      var el6 = document.createElement("div");
+      el6.id = "marker6";
+      el6.class = "f";
+
+      // create the marker
+      new mapboxgl.Marker(el6)
+        .setLngLat([21.8243,39.0742])
+        .setPopup(popup)
+
+        // sets a popup on this marker
+        .addTo(map);
+
+
+
+
+        
+      let btn = document.getElementById("marker");
+      let btn1 = document.getElementById("marker1");
+      let btn2 = document.getElementById("marker2");
+      let btn3 = document.getElementById("marker3");
+      let btn4 = document.getElementById("marker4");
+      let btn5 = document.getElementById("marker5");
+      let btn6 = document.getElementById("marker6");
+
+      let mapy = document.getElementById("map");
+      let video = document.querySelector(".vid");
+
+      //london
+
+      btn.addEventListener("click", () => {
+        console.log("clicked");
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/newlondomn.mp4";
+        setTimeout(() => {
+          window.location = "/new";
+        }, 7000);
+      });
+
+      //switzerland
+
+      btn1.addEventListener("click", () => {
+        console.log("clicked");
+
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/newswitz.mp4";
+        setTimeout(() => {
+          window.location = "/dub";
+        }, 5000);
+      });
+
+      //maldives
+
+      btn2.addEventListener("click", () => {
+        console.log("clicked");
+
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/newmaldives.mp4";
+        setTimeout(() => {
+          window.location = "/mal";
+        }, 6000);
+      });
+
+      //dubai
+
+      btn3.addEventListener("click", () => {
+        console.log("clicked");
+
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/newdubai.mp4";
+        setTimeout(() => {
+          window.location = "/dub";
+        }, 7000);
+      });
+
+      //france
+
+      btn4.addEventListener("click", () => {
+        console.log("clicked");
+
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/france.mp4";
+        setTimeout(() => {
+          window.location = "/green";
+        }, 6000);
+      });
+
+      //spain
+
+      btn5.addEventListener("click", () => {
+        console.log("clicked");
+
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/newspain.mp4";
+        setTimeout(() => {
+          window.location = "/green";
+        }, 5000);
+      });
+
+      //greece
+
+      btn6.addEventListener("click", () => {
+        console.log("clicked");
+
+        mapy.style.display = "none";
+        video.style.display = "block";
+        video.src = "images/newfreece.mp4";
+        setTimeout(() => {
+          window.location = "/new";
+        }, 5000);
+      });
+    </script>
+  </body>
+</html>

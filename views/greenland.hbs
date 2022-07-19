@@ -1,0 +1,2093 @@
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap");
+      
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            background: rgb(181,204,215);
+background: linear-gradient(81deg, rgba(181,204,215,1) 35%, rgba(12,46,85,0.7430322470785189) 89%);
+        }
+        
+        .title {
+            background: rgba(255, 255, 255, 0.7);
+            color: #333;
+            position: fixed;
+            text-align: right;
+            top: 10%;
+            right: 0;
+            padding: 10px 15px;
+            margin: 0;
+            z-index: 100;
+        }
+        
+        .slider {
+            position: relative;
+            overflow: hidden;
+            top: 10%;
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        .slide {
+            background-position: center center;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            height: 95vh;
+            width: 100%;
+        }
+        
+        .slide.active {
+            transform: translateX(-100%);
+        }
+        
+        .slide .info {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333;
+            padding: 20px 15px;
+            position: absolute;
+            opacity: 0.1;
+            top: 520px;
+            left: 40px;
+            text-align: center;
+            width: 300px;
+            max-width: 100%;
+        }
+        
+        .slide.active .info {
+            opacity: 1;
+            transform: translateY(-40px);
+            transition: all 0.5s ease-in-out 0.8s;
+        }
+        
+        .slide .info h1 {
+            margin: 10px 0;
+        }
+        
+        .slide .info p {
+            letter-spacing: 1px;
+        }
+        
+        .eraser {
+            background: #f5f5f5;
+            position: absolute;
+            transition: transform 0.5s ease-in-out;
+            opacity: 0.95;
+            top: 0;
+            left: 100%;
+            /* height: 100%; */
+            height: 95vh;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .eraser.active {
+            transform: translateX(-100%);
+        }
+        
+        .buttons-container {
+            position: absolute;
+            bottom: 50px;
+            right: 60px;
+            top: 82%;
+            /*   display: flex; */
+        }
+        
+        .buttons-container button {
+            border: 2px solid #fff;
+            /* background-color: transparent; */
+            background-color: #f5f5f5;
+            /* color: #fff; */
+            color: #333;
+            cursor: pointer;
+            padding: 8px 30px;
+            margin-right: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        
+        .buttons-container button:hover {
+            background-color: #fff;
+            color: #A9A9A9;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 400px) {
+            .slide .info {
+                top: 100px;
+                left: 5px;
+                /* top: 250px;
+        left: 5px; */
+            }
+        }
+        
+        header {
+            position: absolute;
+            /* background: #fff; */
+            /* background: #fff linear-gradient(90deg, #d0cbcb, #20b920e6, #ef3f33, rgba(0, 0, 0, 0.8)); */
+            background: rgb(148,181,196);
+background: linear-gradient(81deg, rgba(148,181,196,1) 35%, rgba(21,91,173,0.7430322470785189) 89%);
+            width: 100%;
+            height: 10vh;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 170px;
+            transition: 0.4s ease;
+            z-index: 1000000;
+        }
+        
+        .ourname {
+            /* color: black; */
+            color: black !important;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+       
+        
+        span {
+            font-size: 2em;
+            color: #800000;
+            color: #00205b;
+            color: rgba(30, 191, 167, 0.9);
+            transition: 0.5s;
+        }
+        
+        #spn2 {
+            margin-left: 15px;
+        }
+        
+        .navbar {
+            position: relative;
+        }
+        
+        .navbaritems a {
+            color: rgb(207, 23, 54);
+            color: white !important;
+            color: black !important;
+            text-decoration: none;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin: 0px 15px;
+            transition: 0.4s ease;
+            position: relative;
+            top: 18;
+        }
+        
+        .navbaritems a::before {
+            content: "";
+            /* background: #800000; */
+            /* background-color: #f7b42c;
+    background-color: #36096d; */
+            background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
+            /* background: linear-gradient(90deg, #000428, #004e92); */
+            /* background: linear-gradient(90deg, #ff9966, #ff5e62); */
+            /* background: linear-gradient(90deg, #4568dc, #b06ab3); */
+            width: 0%;
+            height: 3px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: 0.4s ease;
+        }
+        
+        .navbaritems a:hover::before {
+            width: 100%;
+        }
+        
+        @media (max-width: 1000px) and (min-width:701px) {
+            header {
+                padding: 15px 61px;
+                width: 100%;
+            }
+            .navbaritems a {
+                font-size: 1.1em;
+                margin: 0px 6px;
+            }
+            .ourname {
+                font-size: 1.2em;
+            }
+        }
+        
+        .c {
+            /* position: absolute; */
+            width: 100%;
+            margin-top: 41px;
+        }
+        
+        @media(max-width:970px) {
+            .c {
+                top: 9%;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            header {
+                padding: 15px 15px;
+            }
+            .navbar {
+                display: none;
+            }
+            .navbar.active {
+                position: fixed;
+                border: 3px solid black;
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(1, 1, 1, 0.5);
+                backdrop-filter: blur(2px);
+            }
+            .navbar.active .navbaritems {
+                backdrop-filter: blur(4px);
+                background: transparent;
+                width: 400px;
+                height: 400px;
+                margin: 20px;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                box-shadow: 0 5px 50px rgb(1 1 1 /20%);
+                font-size: 14px;
+            }
+            .navbaritems a {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 1.2em;
+                margin: 20px;
+                font-weight: bold;
+                color: white !important;
+            }
+            .menunav {
+                background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png") no-repeat;
+                background-position: center;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                transition: 0.4s ease;
+                z-index: 1000000;
+            }
+            .menunav.active {
+                z-index: 1000000;
+                transition: 0.4s ease;
+                background: url("https://cdn1.vectorstock.com/i/1000x1000/96/55/close-icon-delete-remove-cancel-exit-symbol-vector-21679655.jpg") no-repeat;
+                background-position: center;
+            }
+            .rainbow {
+                opacity: 0;
+            }
+            .ourname {
+                font-size: 1.1em;
+            }
+            .c {
+                top: 7%;
+                margin-top: 41px;
+            }
+            header {
+                background: rgb(148,181,196);
+background: linear-gradient(81deg, rgba(148,181,196,1) 35%, rgba(21,91,173,0.7430322470785189) 89%);
+            }
+        }
+        
+        @media(max-width:1150px) and (min-width:1000px) {
+            .ourname {
+                font-size: 1.5em;
+            }
+            .navbaritems a {
+                font-size: 1.4em;
+                margin: 0px 7px;
+            }
+        }
+        
+        .mc1 {
+            position: absolute;
+            width: 100vw;
+            z-index: -100;
+        }
+        
+        @media(min-width:1500px) {
+            .mainp {
+                width: 100%;
+            }
+        }
+        
+        @media(min-width:700px) {
+            .mc1 {
+                top: 10%;
+            }
+        }
+        
+        @media(max-width:1379px) {
+            .slider {
+                display: none;
+            }
+        }
+        
+        @media(min-width:1379px) {
+            .c {
+                display: none;
+            }
+        }
+        
+        @media(max-width:600px) {
+            .c {
+                display: block;
+                top: 10%;
+            }
+        }
+        
+        @media(min-height:1130px) {
+            header {
+                padding: 23px 60px;
+            }
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.856);
+            width: 100%;
+            /* position: absolute;
+    bottom: 0%; */
+            /* cursor: pointer; */
+            /* min-height: %; */
+            color: whitesmoke;
+        }
+        
+        .cont1 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont2 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont3 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont4 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .cont5 {
+            margin-left: 20px;
+            margin-top: 50px;
+        }
+        
+        .rowa {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        
+        li {
+            list-style: none;
+            margin-top: 4px;
+        }
+        
+        .fa {
+            text-decoration: none;
+            color: white!important;
+        }
+        
+        li .fa {
+            text-decoration: none;
+            color: white!important;
+        }
+        
+        u .fa {
+            text-decoration: none;
+            color: white!important;
+        }
+        
+        .fa:hover {
+            color: rgba(223, 124, 143, 0.89) !important;
+        }
+        
+        #BB {
+            color: #03a9f4;
+        }
+        
+        .maincontainerd {
+            width: 100%;
+            /* height: 100vh; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .containersd {
+            width: 100%;
+            /* height: 500px; */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            /* margin: 10px 10px 0px 20px; */
+            flex-wrap: wrap;
+        }
+        
+        .c6,
+        .c7,
+        .c8,
+        .c1,
+        .c2,
+        .c3,
+        .c4,
+        .c5 {
+            width: 500px;
+            /* height: 100%; */
+            height: 500px;
+            position: relative;
+            margin: 10px 10px 20px 20px;
+            cursor: pointer;
+        }
+        
+        .pz {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://i.pinimg.com/originals/85/0a/4d/850a4d2778d6db747abe83d6b01081b2.jpg")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pz2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://www.jacobs.com/sites/default/files/styles/1070xh/public/2019-10/Dubai_HERO.jpg?itok=E4rY8AsG")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pic3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://www.hochtief.com/fileadmin/aktivitaeten/projekte/americas/burjkhalifa/Burj_Khalifa_iStock_15243556_c__dblight__iStockphoto_stage.jpg")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pic4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://www.costacruises.com/content/dam/costa/inventory-assets/ports/DXB/dubai.jpg")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pic5 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://cdn.pixabay.com/photo/2015/09/28/21/32/the-palm-962785__480.jpg")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pic6 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://images.adsttc.com/media/images/5a4b/bce6/b22e/38b5/fa00/0067/newsletter/Screen_Shot_2018-01-02_at_12.05.08_PM.jpg?1514912994")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pic7 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://imagevars.gulfnews.com/2020/06/22/Dubai_172db8eff9b_medium.jpg")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .pic8 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff url("https://pyt-blogs.imgix.net/2020/05/david-rodrigo-kZ1zThg6G40-unsplash-1.jpg?auto=format&ixlib=php-3.3.0")no-repeat center center/cover;
+            opacity: 0.87;
+        }
+        
+        .center6,
+        .center7,
+        .center8,
+        .center5,
+        .center4,
+        .center3,
+        .center2,
+        .center {
+            position: absolute;
+            width: 60%;
+            /* height: 60%; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: black;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            transform: translate(53%, 74%);
+            opacity: 0;
+            transition: 0.3s ease-in-out;
+        }
+        
+        .top {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top5 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top6 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top7 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .top8 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .cardcont {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            /* border: 3px solid red; */
+        }
+        
+        .card {
+            width: 600px;
+            /* border: 2px solid black; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 5px 5px;
+            box-shadow: 0px 0px 7px black;
+        }
+        
+        .content {
+            height: 310px;
+            width: 350px;
+            /* border: 2px solid blue; */
+            position: relative;
+        }
+        
+        .pic {
+            height: 310px;
+            width: 240px;
+            /* border: 2px solid blue; */
+            overflow: hidden;
+        }
+        
+        .rating {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        h1 {
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 10px;
+            /* border-bottom: 3px solid black; */
+        }
+        
+        .rate {
+            /* width: 60px; */
+            /* height: 30px; */
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            padding: 5px 5px;
+            margin-right: 10px;
+            padding-left: 10px;
+            border-radius: 8px;
+        }
+        
+        .star {
+            width: 40px;
+        }
+        
+        .addres {
+            color: rgb(73, 73, 73);
+            opacity: 0.8;
+            padding-left: 10px;
+            font-size: 14px;
+            font-family: 'Baloo Bhaina 2', cursive;
+        }
+        
+        .full {
+            padding-left: 10px;
+            font-size: 16px;
+            padding-right: 10px;
+            color: rgb(73, 73, 73);
+            opacity: 1;
+            /* margin-top: 2px; */
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        .list {
+            padding-left: 10px;
+            margin-top: 10px;
+            font-size: 13px;
+            font-family: 'Baloo Bhaina 2', cursive;
+        }
+        
+        .hoteldesc {
+            font-size: 12px;
+            /* margin-top: 5px; */
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: 'Baloo Bhaina 2', cursive;
+        }
+        
+        .book {
+            width: 100%;
+            padding: 9px 5px;
+            margin-top: 0px;
+            outline: none;
+            background-color: rgb(85, 85, 231);
+            color: white;
+            font-weight: bold;
+            /* margin-top: 12px; */
+            cursor: pointer;
+            margin-left: 2px;
+            position: absolute;
+            bottom: 2px;
+
+            
+        }
+        
+        .book:hover {
+            background-color: rgba(85, 85, 231, 0.849);
+        }
+        
+        #pic1 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/uploadimages/21/46/21469210.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .pic {
+            position: relative;
+        }
+        
+        .dummy {
+            background-color: rgba(168, 180, 190, 0.726);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: -240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            /* align-items: center; */
+            padding: 0px 10px;
+            transition: 0.5s;
+            color: black;
+        }
+        .dummy li{
+            transition: 0.3s ease-in-out;
+        }
+        
+        .dummy li:hover {
+            font-size: 20px;
+            font-weight: bolder;
+        }
+        
+        .dummy p {
+            font-style: italic;
+        }
+        
+        #haa {
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: "Baloo Bhaina 2", cursive;
+        }
+        
+        .pic:hover .dummy {
+            top: 0;
+            left: 0;
+        }
+        
+        #pic2 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/partnerimages/33/34/333420858.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        #btn-grad {
+            background-image: linear-gradient( to right, #314755 0%, #26a0da 51%, #314755 100%);
+        }
+        
+        #btn-grad {
+            margin: 0px;
+            margin-left: -15px;
+            margin-top: 1px;
+            padding: 5px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        #btn-grad:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .cross {
+            cursor: pointer;
+            z-index: 1;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 35px;
+            display: none;
+        }
+        
+        @media (max-width:600px) {
+            .cross {
+                display: block;
+            }
+            #btn-grad {
+                display: block;
+            }
+        }
+        
+        .space {
+            margin-bottom: 50px;
+        }
+        
+        .mainc {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            /* margin: 20px 20px 10px 20px; */
+        }
+        
+        .cu {
+            display: flex;
+            width: 80%;
+            height: 80%;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .b {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            background: url("https://i.pinimg.com/originals/d9/7b/f2/d97bf2e1bcdedd6651703c3f633d28c8.jpg")no-repeat center center/cover;
+            opacity: 0.9;
+        }
+        
+        .cn {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #h1 {
+            position: absolute;
+            top: 5%;
+            left: 7%;
+            color: #fff;
+        }
+        
+        #h2 {
+            position: absolute;
+            bottom: 40%;
+            color: #fff;
+            font-size: 4em;
+            letter-spacing: 2px;
+        }
+        
+        #h3 {
+            position: absolute;
+            bottom: 32%;
+            color: #fff;
+            font-size: 4em;
+            letter-spacing: 2px;
+        }
+        
+        #b1 {
+            position: absolute;
+            bottom: 20%;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border: 3px solid #fff;
+            /* padding: 10px 12px; */
+            border-radius: 20px;
+            letter-spacing: 1px;
+            transition: 0.2s ease-in-out;
+            font-weight: 600;
+        }
+        
+        #b1:hover {
+            background-color: #fff;
+            color: rgb(126, 120, 120);
+        }
+        
+        .t {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        @media(max-width:980px) {
+            #h3,
+            #h2 {
+                font-size: 3em;
+            }
+        }
+        
+        @media(max-width:750px) {
+            #h3,
+            #h2 {
+                font-size: 2.5em;
+            }
+        }
+        
+        @media(max-width:350px) {
+            #h3,
+            #h2 {
+                font-size: 2em;
+            }
+
+        }
+        .news {
+	 margin: 0em auto;
+	 padding: 1.5em;
+	 background: linear-gradient(white, white) padding-box, url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/80625/sea.jpg) border-box 0 / cover;
+	 border: 2em solid transparent;
+	 box-shadow: 5px 3px 30px black;
+	 font-size: 1.5em;
+     font-weight:600;
+	 font-family: 'Lora', serif;
+	 font-style: italic;
+	 line-height: 1.5;
+	 width: 80%;
+  
+}
+ 
+ .aut {
+	 font-style: normal;
+	 font-size: 1.2em;
+	 font-weight: bold;
+     
+}
+.coverrr{
+    background-color:transparent;
+    padding: 50px 0px;
+  
+}
+.heaa{
+    text-align: center;
+    padding: 10px 0px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+ #hello{
+   text-align: center;
+   margin-top: -60px;
+   font-size: 15px;
+   font-style: italic;
+   color: red;
+ }
+ .sas{
+     color: black !important;
+ }
+ .sas:hover{
+     color: black;
+     text-decoration: none;
+ }
+ .sas:hover span {
+     color:red;
+ }
+
+             #pzz2 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/partnerimages/94/76/947623966.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }   #pzz3 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/partnerimages/71/62/716290224.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }   #pzz5 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/partnerimages/71/61/716104916.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }   #pzz4 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/uploadimages/49/38/49383952.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+          #pzz1 {
+            background-image: url(https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_470,q_auto,w_805/partnerimages/71/75/717542164.jpeg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+          #pzz6 {
+            background-image: url(https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/de/fe/35/hero-image-stamp.jpg?w=1200&h=-1&s=1);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        a{
+            color: white !important;
+           
+        }
+        a:hover{
+            text-decoration: none !important;
+        }
+     
+    </style>
+    <script>
+        window.onload = function() {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                backgroundColor: "#bdc3c7",
+                backgroundColor: "#ecf0f1",
+                title: {
+                    text: "General Data"
+                },
+                legend: {
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{name}: <strong>{y}%</strong>",
+                    indexLabel: "{name} - {y}%",
+                    dataPoints: [{
+                        y: 26,
+                        name: "School Aid",
+                        exploded: true
+                    }, {
+                        y: 20,
+                        name: "Medical Aid"
+                    }, {
+                        y: 5,
+                        name: "Debt/Capital"
+                    }, {
+                        y: 3,
+                        name: "Elected Officials"
+                    }, {
+                        y: 7,
+                        name: "University"
+                    }, {
+                        y: 17,
+                        name: "Executive"
+                    }, {
+                        y: 22,
+                        name: "Other Local Assistance"
+                    }]
+                }]
+            });
+            chart.render();
+        }
+
+        function explodePie(e) {
+            if (typeof(e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+            } else {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+            }
+            e.chart.render();
+
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+      
+        <p class="ourname"> <a href="#" class="sas"><span>S</span>kyline<span id="spn2">T</span>ravels</a></p>
+        <div class="menunav"></div>
+        <div class="navbar">
+            <div class="navbaritems">
+                <a href="" style="color:black; font-weight: 600; ">Home</a>
+                <a href="" style="color:black; font-weight: 600; ">Video Gal</a>
+                <a href="" style="color:black; font-weight: 600; ">Contact Us</a>
+                <a href="" style="color:black; font-weight: 600; ">AboutUs</a>
+            </div>
+        </div>
+    </header>
+    <!-- <h5 class="title">Based on Florin-pop's tutorial https://www.florin-pop.com/blog/2019/03/full-page-slider/</h5> -->
+    <div class="slider">
+        <div class="slider-container">
+            <div class="slide active" style="background-image: url('go.jpeg');">
+                <!-- <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1527838832700-5059252407fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=943&q=80');"> -->
+                <!-- <div class="info">
+                    <h1>Sultanahmet</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum.</p>
+                </div> -->
+            </div>
+            <div class="slide" style="background-image: url('https://moneyinc.com/wp-content/uploads/2016/07/Hotel-Arctic-750x438.jpg');">
+                <div class="info">
+                    <h1> 7 Star</h1>
+                    <p>Ocean View and Highest Rated 7 Star Hotel</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://files.tripstodiscover.com/files/2015/04/Hotel-Sisimiut.jpg');">
+                <div class="info">
+                    <h1>5 STAR</h1>
+                    <p>Shooting Rated Hotel Vast and Premium</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://622386.smushcdn.com/1421302/wp-content/uploads/2019/07/ilimanac_fd.jpg?lossy=1&strip=1&webp=1');">
+                <div class="info">
+                    <h1>4 STAR</h1>
+                    <p>Top View Ocean and City View Premium Hotel.</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://www.greenland-travel.com/wp-content/uploads/2019/05/hotel-arctic-i-ilulissat-unknown-photographer-kopi.jpg');">
+                <div class="info">
+                    <h1>4 STAR</h1>
+                    <p>City View and Highly Rated Loacation</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/92/da/1c/hotel-greenland.jpg?w=900&h=-1&s=1');">
+                <div class="info">
+                    <h1>3 STAR</h1>
+                    <p>
+                        UAE's Largest Developer Emaar Sells 5-Star Dubai Hotel Sky View for USD 204mn</p>
+                </div>
+            </div>
+        </div>
+        <div class="eraser"></div>
+        <div class="buttons-container">
+            <button id="previous">L</button>
+            <button id="next">R</button>
+            <!-- <button id="previous"><i class="fas fa-chevron-left"></i></i></button>
+                <button id="next"><i class="fas fa-chevron-right"></i></button> -->
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="c">
+        <img src="go.jpeg" alt="" class="img-responsive img ig1">
+    </div>
+    <br>
+    <br>
+    <h2 style="text-align: center; padding: 0px 10px; font-weight: bold; margin-top: 30px; margin-bottom: 10px;">
+        Have A Refreshment Quote !! 
+    </h2>
+    <div class="horr" style="width: 10%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%; margin-bottom: 0px;"></div>
+    <div class="coverrr">
+   
+        <div id="quotemain" class="news">I think that beauty can injure you to death. It can cause an injury that can neve
+       
+        </div>
+        <h1 id="hello">-author</h1>
+      </div>
+ 
+      <script>
+        let quote = document.getElementById('quotemain')
+        let author = document.getElementById('hello')
+     
+      
+        // console.log(author.innerText);
+        let myarr = [
+            {
+               quote: "What really knocks me out is a book that, when you're all done reading it, you wish the author that wrote it was a terrific friend of yours and you could call him up on the phone whenever you felt like it. That doesn't happen much, though.",
+               writer:"J.D. Salinger"
+    
+            },
+            {
+                quote:"A writer is someone for whom writing is more difficult than it is for other people.",
+                writer:"Thomas Mann"
+            },
+            {
+                quote:"I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best.",
+                writer:"Marilyn Monroe"
+            },
+            {
+                quote:"Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.",
+                writer:"Albert Einstein"
+            },
+            {
+                quote:"Be who you are and say what you feel, because those who mind don't matter, and those who matter don't mind.",
+                writer:"Bernard M .Baruch"
+            },
+            {
+                quote:"You know you're in love when you can't fall asleep because reality is finally better than your dreams.",
+                writer:"Dr. Seuss"
+            }
+        ]
+        function callme(){
+            let num = Math.floor((Math.random() * 6) );
+            quote.innerText = myarr[num].quote;
+            author.innerText = myarr[num].writer;
+            console.log(author.innerText);
+        }
+    
+          callme();
+    
+          setInterval(callme, 7000);
+    </script>
+    
+    <br>
+    <h2 style="text-align: center; padding: 0px 10px; font-weight: bold; margin-top: 30px; margin-bottom: 10px;">
+        Gallery
+    </h2>
+    <div class="horr" style="width: 6%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%; margin-bottom: 20px;"></div>
+    <div class="maincontainerd">
+        <div class="containersd">
+            <div class="c1" id="c1">
+                <div class="center" id="center">Image1
+                </div>
+                <div class="top" id="top"></div>
+                <div class="pz" id="pz"></div>
+            </div>
+            <div class="c2" id="c2">
+                <div class="center2" id="center2">Image2
+                </div>
+                <div class="top2" id="top2"></div>
+                <div class="pz2" id="pz2"></div>
+            </div>
+            <div class="c3" id="c3">
+                <div class="center3" id="center3">Image3
+                </div>
+                <div class="top3" id="top3"></div>
+                <div class="pic3" id="pic3"></div>
+            </div>
+            <div class="c4" id="c4">
+                <div class="center4" id="center4">Image4
+                </div>
+                <div class="top4" id="top4"></div>
+                <div class="pic4" id="pic4"></div>
+            </div>
+            <div class="c5" id="c5">
+                <div class="center5" id="center5">Image5
+                </div>
+                <div class="top5" id="top5"></div>
+                <div class="pic5" id="pic5"></div>
+            </div>
+            <div class="c6" id="c6">
+                <div class="center6" id="center6">Image6
+                </div>
+                <div class="top6" id="top6"></div>
+                <div class="pic6" id="pic6"></div>
+            </div>
+            <div class="c7" id="c7">
+                <div class="center7" id="center7">Image6
+                </div>
+                <div class="top7" id="top7"></div>
+                <div class="pic7" id="pic7"></div>
+            </div>
+            <div class="c8" id="c8">
+                <div class="center8" id="center8">Image6
+                </div>
+                <div class="top8" id="top8"></div>
+                <div class="pic8" id="pic8"></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h2 style="text-align: center; padding: 0px 10px; font-weight: bold; margin-top: 30px; margin-bottom: 10px;">
+        Hotels
+    </h2>
+    <div class="horr" style="width: 6%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%; margin-bottom: 20px;"></div>
+    <br>
+    <div class="space">
+        <div class="cardcont">
+            <div class="card">
+                <div class="pic" id="pic1">
+                    <button class="click" id="btn-grad">Features</button>
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+                        <h1 id="haa">Wild Planet Jungle Resort</h1>
+                        <li>☑️ Nightclub / DJ</li>
+                        <li>☑️ Babysitting</li>
+                        <li>☑️ Air conditioning</li>
+                        <li>☑️ Allergy-free room</li>
+                        <li>☑️ Free parking</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1>Wild Planet Jungle Resort</h1>
+                        <div class="rate">
+                            10.0
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres">Nilgiris, India
+                    </p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ Landmark view</li>
+                        <li>☑️ Suites</li>
+                        <li>☑️ Pool</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        Wild Planet Jungle Resort an intimate, secluded luxurious resort located in the middle of a dense rainforest. . </p>
+                    <button class="book"><a href="https://www.trivago.in/en?themeId=28&iPathId=404936&sem_keyword=hotel%205%20star%20nilgiris&sem_creativeid=76210043480863&sem_matchtype=bb&sem_network=s&sem_device=c&sem_campaignid=367772677&sem_adgroupid=1219358848650379&sem_targetid=kwd-76210262072463%3Aloc-90&cipc=sem&cip=9129001363&msclkid=be1c454bce4015e31cfc245ecad08c76">Book Now</a></button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="pic" id="pic2">
+                    <button class="click" id="btn-grad">Features</button>
+
+
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+
+
+                        <h1 id="haa">Hotel Icefjord</h1>
+                            <li>☑️ Nightclub / DJ</li>
+                            <li>☑️ Babysitting</li>
+                            <li>☑️ Air conditioning</li>
+                            <li>☑️ Allergy-free room</li>
+                            <li>☑️ Free parking</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1>Hotel Icefjord</h1>
+                        <div class="rate">
+                            9.5
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres">Ilulissat</p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ Ocean view</li>
+                        <li>☑️ On-demand films</li>
+                        <li>☑️ Housekeeping</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        The Icefjord, a three-star accommodation, is a well-situated Hotel in the centre of Ilulissat, Greenland.
+                    </p>
+                    <button class="book"><a href="https://www.trivago.in/?aDateRange%5Barr%5D=2021-08-24&aDateRange%5Bdep%5D=2021-08-25&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=65%2F200&hasList=1&hasMap=0&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=">Book Now</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="cardcont">
+            <div class="card">
+                <div class="pic" id="pzz1">
+                    <button class="click" id="btn-grad">Features</button>
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+                        <h1 id="haa">Hotel Arctic </h1>
+                            <li>☑️ Nightclub / DJ</li>
+                            <li>☑️ Babysitting</li>
+                            <li>☑️ Air conditioning</li>
+                            <li>☑️ Allergy-free room</li>
+                            <li>☑️ Beach</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1>Hotel Arctic</h1>
+                        <div class="rate">
+                            9.0
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres"> Ilulissat</p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ City view</li>
+                        <li>☑️ Non-smoking rooms</li>
+                        <li>☑️ All Facilities</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        Hotel Arctic is conveniently located in the popular Ilulissat area. The property features a wide range of facilities to make your stay a pleasant experience
+                    </p>
+                    <button class="book"><a href="https://www.trivago.in/?aDateRange%5Barr%5D=2021-08-24&aDateRange%5Bdep%5D=2021-08-25&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=65%2F200&hasList=1&hasMap=0&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=Hotel Arctic is conveniently located in the popular Ilulissat area. The property features a wide range of facilities to make your stay a pleasant experience">Book Now</a></button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="pic" id="pzz2">
+                    <button class="click" id="btn-grad">Features</button>
+
+
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+
+
+                        <h1 id="haa">Nattoralik</h1>
+                        <li>☑️ Nightclub / DJ</li>
+                            <li>☑️ Babysitting</li>
+                            <li>☑️ Air conditioning</li>
+                            <li>☑️ Allergy-free room</li>
+                            <li>☑️ Beach</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1>Nattoralik</h1>
+                        <div class="rate">
+                            10
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres">Aasiaat</p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ Pool view</li>
+                        <li>☑️ Landmark view</li>
+                        <li>☑️ Family rooms</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        Nattoralik is located in Aasiaat. Among the facilities at this property are a shared kitchen and a shared lounge, along with free WiFi throughout the property. There is free private parking and the property provides free airport shuttle service.
+                    </p>
+                    <button class="book"><a href="https://www.trivago.in/?aDateRange%5Barr%5D=2021-08-24&aDateRange%5Bdep%5D=2021-08-25&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=65%2F200&hasList=1&hasMap=0&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=">Book Now</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="cardcont">
+            <div class="card">
+                <div class="pic" id="pzz3">
+                    <button class="click" id="btn-grad">Features</button>
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+                        <h1 id="haa"> Sisimiut</h1>
+                        <li>☑️ Nightclub / DJ</li>
+                        <li>☑️ Babysitting</li>
+                        <li>☑️ Air conditioning</li>
+                        <li>☑️ Allergy-free room</li>
+                        <li>☑️ Conference Rooms</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1> Sisimiut</h1>
+                        <div class="rate">
+                            9.0
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres"> Sisimiut</p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ Bidet</li>
+                        <li>☑️ Minibar</li>
+                        <li>☑️ City and Pool View</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        The 3-star Hotel Sisimiut offers comfort and convenience whether you're on business or holiday in Sisimiut. Featuring a satisfying list of amenities, guests will find their stay at the property a comfortable
+                    </p>
+                    <button class="book"><a href="https://www.trivago.in/?aDateRange%5Barr%5D=2021-08-24&aDateRange%5Bdep%5D=2021-08-25&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=65%2F200&hasList=1&hasMap=0&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode="> Book Now </a></button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="pic" id="pzz5">
+                    <button class="click" id="btn-grad">Features</button>
+
+
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+
+
+                        <h1 id="haa">Hans Egede</h1>
+                        <li>☑️ Nightclub / DJ</li>
+                        <li>☑️ Babysitting</li>
+                        <li>☑️ Air conditioning</li>
+                        <li>☑️ Allergy-free room</li>
+                        <li>☑️ Conference Rooms</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1>Hans Egede</h1>
+                        <div class="rate">
+                            8.5
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres">Nuuk </p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ Satellite TV</li>
+                        <li>☑️ City and Ocean View</li>
+                        <li>☑️ Pool</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        For business travellers, this hotel features a business centre and conference/meeting rooms. Check-in/check-out can be done at the 24 hour front desk from 12:00 for check-ins and as late as 10:00 for check-out.
+                    </p>
+                    <button class="book" ><a href="https://www.trivago.in/?aDateRange%5Barr%5D=2021-08-24&aDateRange%5Bdep%5D=2021-08-25&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=65%2F200&hasList=1&hasMap=0&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=">Book Now</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="cardcont">
+            <div class="card">
+                <div class="pic" id="pzz4">
+                    <button class="click" id="btn-grad">Features</button>
+                    <div class="dummy">
+                        <img src="close-outline.svg" alt="" class="cross">
+                        <h1 id="haa">Somandshjem</h1>
+                        <li>☑️ Nightclub / DJ</li>
+                        <li>☑️ Babysitting</li>
+                        <li>☑️ Air conditioning</li>
+                        <li>☑️ Allergy-free room</li>
+                        <li>☑️ Conference Rooms</li>
+                        <p>Come have an amazing Expirience</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="rating">
+                        <h1>Somandshjem</h1>
+                        <div class="rate">
+                            9.5
+                            <img src="star.png" alt="err" class="star" />
+                        </div>
+                    </div>
+                    <p class="addres">Sisimiut</p>
+                    <!-- <p class="full">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde
+              incidunt est debitis nobis optio harum!
+            </p> -->
+                    <div class="list">
+                        <li>☑️ Bridal Suite</li>
+                        <li>☑️ Family Rooms</li>
+                        <li>☑️ All Facilities</li>
+                    </div>
+                    <p class="addres" style="margin-top: 5px">Description:</p>
+                    <p class="hoteldesc">
+                        Centrally located 3 star hotel, close to the harbour, and the museum.
+We have 32 rooms with a choice of standard single and double rooms. There are standard plus rooms as well.
+                    </p>
+                    <button class="book"><a href="https://www.trivago.in/?aDateRange%5Barr%5D=2021-08-24&aDateRange%5Bdep%5D=2021-08-25&aPriceRange%5Bfrom%5D=0&aPriceRange%5Bto%5D=0&iRoomType=7&aRooms%5B0%5D%5Badults%5D=2&cpt2=65%2F200&hasList=1&hasMap=0&bIsSeoPage=0&sortingId=1&slideoutsPageItemId=&iGeoDistanceLimit=20000&address=&addressGeoCode=&offset=0&ra=&overlayMode=">Book Now</a></button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2 style="text-align: center; padding: 0px 10px; font-weight: bold; margin-top: 30px; margin-bottom: 10px;">
+       Have A Tour !!
+    </h2>
+    <div class="horr" style="width: 6%; height: 3px; background-color:#800000; margin: 0px auto; border-radius: 50%; margin-bottom: 0px;"></div>
+    <div class="mainc">
+        <div class="cu">
+            <div class="t"></div>
+            <div class="b"></div>
+            <div class="cn">
+                <h1 id="h1">SkyBright Travles</h1>
+                <h2 id="h2">Top Places You Must Visit</h2>
+                <h2 id="h3">When In Dubai</h3>
+                    <button id="b1" class="btn btn-lg b1">Read Story</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // let btn = document.querySelector('.click');
+        let btnss = document.getElementsByClassName("click");
+        let extra = document.getElementsByClassName("dummy");
+        let cross = document.getElementsByClassName("cross");
+
+        for (let i = 0; i < btnss.length; i++) {
+            btnss[i].addEventListener("click", () => {
+                call(i);
+            });
+            cross[i].addEventListener("click", () => {
+                callit(i);
+            });
+        }
+
+        function call(i) {
+            //    extra[i].style.left = 0;
+            for (let num = 0; num < extra.length; num++) {
+                if (i == num) {
+                    extra[num].style.left = 0;
+                    btnss[num].style.display = 'none'
+                } else {
+                    extra[num].style.left = "-240px";
+                    btnss[num].style.display = 'block'
+                }
+            }
+        }
+
+        function callit(i) {
+            for (let n = 0; n < extra.length; n++) {
+                if (i == n) {
+                    extra[n].style.left = "-240px";
+                    btnss[n].style.display = 'block';
+                }
+            }
+        }
+    </script>
+    <div id="chartContainer" style="height: 70vh; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <br>
+    <script type="text/javascript" src="vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        const slides = document.querySelectorAll('.slider-container .slide'); // get all the slides
+        const eraser = document.querySelector('.eraser'); // the eraser
+        const prev = document.getElementById('previous'); // previous button
+        const next = document.getElementById('next'); // next button
+        const intervalTime = 6000; // time until nextSlide triggers in miliseconds
+        const eraserActiveTime = 500; // time to wait until the .eraser goes all the way
+        let sliderInterval; // variable used to save the setInterval and clear it when needed
+
+
+        const nextSlide = () => {
+            // Step 1. Add the .active class to the eraser - this will trigger the eraser to move to the left.
+            eraser.classList.add('active');
+            // Step 2. Set a timeout that will allow the eraser to move all the way to the left. This is where we'll use the eraserActiveTime - it has to be the same as the CSS value we mentioned above.
+            setTimeout(() => {
+                // Step 3. Get the active .slide and toggle the .active class on it (in this case, remove it).
+                const active = document.querySelector('.slide.active');
+                active.classList.toggle('active');
+                // Step 4. Check to see if the .slide has a next element sibling available. If it has, add the .active class to it.
+                if (active.nextElementSibling) {
+                    active.nextElementSibling.classList.toggle('active');
+                } else {
+                    // Step 5. If it's the last element in the list, add the .active class to the first slide (the one with index 0).
+                    slides[0].classList.toggle('active');
+                }
+                // Step 6.Remove the .active class from the eraser - this will trigger the eraser to move back to the right. It also waits 200 ms before doing this (just to give enough time for the next .slide to move in place).
+                setTimeout(() => {
+                    eraser.classList.remove('active');
+                }, 180);
+            }, eraserActiveTime);
+        }
+
+        //Button functionality
+        const prevSlide = () => {
+            eraser.classList.add('active');
+            setTimeout(() => {
+                const active = document.querySelector('.slide.active');
+                active.classList.toggle('active');
+                // The changed part from the nextSlide code
+                if (active.previousElementSibling) {
+                    active.previousElementSibling.classList.toggle('active');
+                } else {
+                    slides[slides.length - 1].classList.toggle('active');
+                }
+                // End of the changed part
+                setTimeout(() => {
+                    eraser.classList.remove('active');
+                }, 180);
+            }, eraserActiveTime);
+        }
+
+        next.addEventListener('click', () => {
+            nextSlide();
+            clearInterval(sliderInterval);
+            sliderInterval = setInterval(nextSlide, intervalTime);
+        });
+
+        prev.addEventListener('click', () => {
+            prevSlide();
+            clearInterval(sliderInterval);
+            sliderInterval = setInterval(nextSlide, intervalTime);
+        });
+
+        sliderInterval = setInterval(nextSlide, intervalTime);
+
+        // Initial slide
+        setTimeout(nextSlide, 500);
+        let btn = document.querySelector(".menunav");
+        let nav = document.querySelector(".navbar");
+        btn.addEventListener("click", () => {
+            btn.classList.toggle("active");
+            nav.classList.toggle("active");
+        });
+        z1 = document.getElementById("center");
+        x1 = document.getElementById("top");
+        z2 = document.getElementById("center2");
+        x2 = document.getElementById("top2");
+        z3 = document.getElementById("center3");
+        x3 = document.getElementById("top3");
+        z4 = document.getElementById("center4");
+        x4 = document.getElementById("top4");
+        z5 = document.getElementById("center5");
+        x5 = document.getElementById("top5");
+        z6 = document.getElementById("center6");
+        x6 = document.getElementById("top6");
+        z7 = document.getElementById("center7");
+        x7 = document.getElementById("top7");
+        z8 = document.getElementById("center8");
+        x8 = document.getElementById("top8");
+        const imp = window.matchMedia("(max-width:770px)");
+        let count1 = 0,
+            count2 = 0,
+            count3 = 0,
+            count4 = 0,
+            count5 = 0;
+        count6 = 0;
+        count7 = 0;
+        count8 = 0;
+        x1.addEventListener("click", () => {
+            count1++;
+            if (count1 % 2 !== 0) {
+                if (imp.matches) {
+                    z1.style.height = "50%";
+                    z1.style.opacity = "1";
+                } else {
+                    z1.style.height = "50%";
+                    z1.style.opacity = "1";
+                }
+            } else {
+                z1.style.height = "0%";
+                z1.style.opacity = "0";
+            }
+        })
+        x2.addEventListener("click", () => {
+            count2++;
+            if (count2 % 2 !== 0) {
+                if (imp.matches) {
+                    z2.style.height = "50%";
+                    z2.style.opacity = "1";
+                } else {
+                    z2.style.height = "50%";
+                    z2.style.opacity = "1";
+                }
+            } else {
+                z2.style.height = "0%";
+                z2.style.opacity = "0";
+            }
+        })
+        x3.addEventListener("click", () => {
+            count3++;
+            if (count3 % 2 !== 0) {
+                if (imp.matches) {
+                    z3.style.height = "50%";
+                    z3.style.opacity = "1";
+                } else {
+                    z3.style.height = "50%";
+                    z3.style.opacity = "1";
+                }
+            } else {
+                z3.style.height = "0%";
+                z3.style.opacity = "0";
+            }
+        })
+        x4.addEventListener("click", () => {
+            count4++;
+            if (count4 % 2 !== 0) {
+                if (imp.matches) {
+                    z4.style.height = "50%";
+                    z4.style.opacity = "1";
+                } else {
+                    z4.style.height = "50%";
+                    z4.style.opacity = "1";
+                }
+            } else {
+                z4.style.height = "0%";
+                z4.style.opacity = "0";
+            }
+        })
+        x5.addEventListener("click", () => {
+            count5++;
+            if (count5 % 2 !== 0) {
+                if (imp.matches) {
+                    z5.style.height = "50%";
+                    z5.style.opacity = "1";
+                } else {
+                    z5.style.height = "50%";
+                    z5.style.opacity = "1";
+                }
+            } else {
+                z5.style.height = "0%";
+                z5.style.opacity = "0";
+            }
+        })
+        x6.addEventListener("click", () => {
+            count6++;
+            if (count6 % 2 !== 0) {
+                if (imp.matches) {
+                    z6.style.height = "50%";
+                    z6.style.opacity = "1";
+                } else {
+                    z6.style.height = "50%";
+                    z6.style.opacity = "1";
+                }
+            } else {
+                z6.style.height = "0%";
+                z6.style.opacity = "0";
+            }
+        })
+        x7.addEventListener("click", () => {
+            count7++;
+            if (count7 % 2 !== 0) {
+                if (imp.matches) {
+                    z7.style.height = "50%";
+                    z7.style.opacity = "1";
+                } else {
+                    z7.style.height = "50%";
+                    z7.style.opacity = "1";
+                }
+            } else {
+                z7.style.height = "0%";
+                z7.style.opacity = "0";
+            }
+        })
+        x8.addEventListener("click", () => {
+            count8++;
+            if (count8 % 2 !== 0) {
+                if (imp.matches) {
+                    z8.style.height = "50%";
+                    z8.style.opacity = "1";
+                } else {
+                    z8.style.height = "50%";
+                    z8.style.opacity = "1";
+                }
+            } else {
+                z8.style.height = "0%";
+                z8.style.opacity = "0";
+            }
+        })
+        ch1 = document.getElementById("b1")
+        ch1.addEventListener("click", () => {
+            location.href = "duuu1.html";
+        })
+        x1.addEventListener("mouseover", () => {
+            z1.style.height = "50%";
+            z1.style.opacity = "1";
+        })
+        x1.addEventListener("mouseout", () => {
+            z1.style.height = "0%";
+            z1.style.opacity = "0";
+        })
+        x2.addEventListener("mouseover", () => {
+            z2.style.height = "50%";
+            z2.style.opacity = "1";
+        })
+        x2.addEventListener("mouseout", () => {
+            z2.style.height = "0%";
+            z2.style.opacity = "0";
+        })
+        x3.addEventListener("mouseover", () => {
+            z3.style.height = "50%";
+            z3.style.opacity = "1";
+        })
+        x3.addEventListener("mouseout", () => {
+            z3.style.height = "0%";
+            z3.style.opacity = "0";
+        })
+        x4.addEventListener("mouseover", () => {
+            z4.style.height = "50%";
+            z4.style.opacity = "1";
+        })
+        x4.addEventListener("mouseout", () => {
+            z4.style.height = "0%";
+            z4.style.opacity = "0";
+        })
+        x5.addEventListener("mouseover", () => {
+            z5.style.height = "50%";
+            z5.style.opacity = "1";
+        })
+        x5.addEventListener("mouseout", () => {
+            z5.style.height = "0%";
+            z5.style.opacity = "0";
+        })
+        x6.addEventListener("mouseover", () => {
+            z6.style.height = "50%";
+            z6.style.opacity = "1";
+        })
+        x6.addEventListener("mouseout", () => {
+            z6.style.height = "0%";
+            z6.style.opacity = "0";
+        })
+        x7.addEventListener("mouseover", () => {
+            z7.style.height = "50%";
+            z7.style.opacity = "1";
+        })
+        x7.addEventListener("mouseout", () => {
+            z7.style.height = "0%";
+            z7.style.opacity = "0";
+        })
+        x8.addEventListener("mouseover", () => {
+            z8.style.height = "50%";
+            z8.style.opacity = "1";
+        })
+        x8.addEventListener("mouseout", () => {
+            z8.style.height = "0%";
+            z8.style.opacity = "0";
+        })
+        VanillaTilt.init(document.getElementById("c1"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c2"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c3"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c4"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c5"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c6"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c7"), {
+            max: 25,
+            speed: 300
+        });
+        VanillaTilt.init(document.getElementById("c8"), {
+            max: 25,
+            speed: 300
+        });
+    </script>
+    <footer style="margin-top: 100px;">
+        <div class="containerd">
+            <div class="rowa">
+                <div class="cont1">
+                    <div class="1hu">
+                        <h1>SkyBright Travels</h1>
+                        <br>
+                        <p>We create the best possible vaccation trips for you.</p>
+                        <span id="BB"><b>Be Bold.</b></span>
+                    </div>
+                </div>
+                <div class="cont2">
+                    <div class="2hu">
+                        <h3>Explore</h2>
+                            <li><a href="#" class="fa">Home</a></li>
+                            <li><a href="#" class="fa">About</a></li>
+                            <li><a href="#" class="fa">VideoGallery</a></li>
+                            <li><a href="#" class="fa">ContactUs</a></li>
+                    </div>
+                </div>
+                <div class="cont3">
+                    <div class="3hu">
+                        <h3>Visit Our Other Sites</h2>
+                            <li>
+                                <a href="https://harshul2611.000webhostapp.com/" class="fa">LifeStyle Store</a>
+                            </li>
+                            <li><a href="https://contentdummywebsite.000webhostapp.com/" class="fa">E-Commerce Store</a></li>
+                            <br>
+                            <h3>ContactUs</h3>
+                            <a href="#" class="fa">skybright@gmail.com</a>
+                            <br>
+                            <p>98789544648454</p>
+                    </div>
+                </div>
+                <div class="cont4">
+                    <div class="4hu">
+                        <h3>Legal</h2>
+                            <li>
+                                Terms
+                            </li>
+                            <li>Privacy</li>
+                            <br>
+                            <h3>Follow</h3>
+                            <li><a href="#" class="fa">Instagram</a></li>
+                            <li><a href="#" class="fa">Twitter</a></li>
+                            <li><a href="#" class="fa">LinkedIn</a></li>
+                    </div>
+                </div>
+                <div class="cont5">
+                    <div class="5hu">
+                        <h3>
+                            <u>Next</u>
+                            <u> : </u>
+                            <u> <a href="#" class="fa">AboutUs</a></u>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="rowa">
+                <div class="cpy">
+                    <p> Copyright © 2021 SkyBright Travels. All Rights Reserved </p>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+</html>-

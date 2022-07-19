@@ -1,0 +1,20 @@
+{
+  "name": "backentfull",
+  "version": "1.0.0",
+  "description": "here we go",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "meet": "nodemon src/app.js",
+    "n": "node src/app.js"
+  },
+  "author": "meetshah",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "mongoose": "^5.12.12",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7"
+  }
+}

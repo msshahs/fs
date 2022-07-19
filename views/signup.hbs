@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+    <link rel="stylesheet" href="css/signup.css">
+  </head>
+  <body>
+    <div class="circle1">
+
+    </div>
+    <div class="circle2">
+
+    </div>
+    <div class="circle3">
+
+    </div>
+    <div class="circle4">
+
+    </div>
+    <div class="big">
+      <div class="main">
+        <div class="upper">
+          <h3>Create New Account Now..</h3>
+          <button class="btn-grad" id="btnone">SIGN UP</button>
+        </div>
+        <div class="lower">
+          <h3>Already have an account ?</h3>
+          <button class="btn-grad" id="btntwo">LOGIN</button>
+        </div>
+        <div class="formcard">
+          <h1 id="one" style="border-bottom: 2px solid white;">SIGN UP</h1>
+          <form action="/signup" method="POST" class="add">
+            <input
+              type="text"
+              class="username"
+              name="username"
+              placeholder="Enter You Name"
+            />
+            <input
+              type="email"
+              class="email"
+              placeholder="Enter Your Email"
+              name="email"
+            />
+            <input
+              type="number"
+              class="number"
+              name="number"
+              placeholder="Enter You Number"
+            />
+            <input
+              type="password"
+              class="password"
+              name="password"
+              placeholder="Enter password"
+            />
+            <input
+              type="password"
+              class="cpassword"
+              name="cpassword"
+              placeholder="Confirm password"
+            />
+            <input type="submit" class="submit" value="Sign Up" />
+          </form>
+
+          <h1 id="two" style="border-bottom: 2px solid white;">LOGIN</h1>
+          <form action="/login" method="POST" class="subtract">
+            <input
+              type="text"
+              name="userid"
+              placeholder="Enter Your Username"
+              class="s"
+              required
+            />
+            <input
+              class="ss"
+              type="password"
+              name="passwordid"
+              placeholder="Enter Your Password"
+              required
+            />
+            <input type="submit" class="submit" value="Login" id="ha" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+
+        let btn1 =document.getElementById('btnone');
+        let btn2 = document.getElementById('btntwo');
+        let upper =document.querySelector('.upper');
+        let lower =document.querySelector('.lower');
+        let form1 =document.querySelector('.add');
+        let form2 =document.querySelector('.subtract');
+        let oneheading =document.querySelector('#one');
+        let twoheading =document.querySelector('#two');
+        let formcard =document.querySelector('.formcard');
+
+        console.log(btn2);
+        btn2.addEventListener('click',()=>{
+            console.log('clicked');
+            formcard.style.bottom = '0';
+            formcard.style.left = '0';
+            formcard.style.top='17%'
+            lower.style.opacity = '0';
+            upper.style.opacity='1';
+            oneheading.style.display='none'
+            twoheading.style.display='block'
+            form1.style.position='absolute'
+            form1.style.top='-1000px'
+            form1.style.left='-1000px'
+            form2.style.position='static'
+            form2.style.top='0'
+            form2.style.left='0'
+
+
+        })
+        btn1.addEventListener('click',()=>{
+            console.log('clicked');
+            
+            formcard.style.left = '0';
+            formcard.style.top='0'
+            
+            lower.style.opacity = '1';
+            upper.style.opacity='0';
+            oneheading.style.display='block'
+            twoheading.style.display='none'
+            
+            form1.style.position='static'
+            form1.style.top='0px'
+            form1.style.left='0px'
+
+             form2.style.position='absolute'
+            form2.style.top='-1000px'
+            form2.style.left='-1000px'
+
+
+        })
+    </script>
+  </body>
+</html>
